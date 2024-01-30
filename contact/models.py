@@ -10,8 +10,5 @@ class ContactUs(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     read_by_admin = models.BooleanField(default=False,null=True)
     admin_response = models.TextField(null=True, blank=True)
-    def __str__(self):
-        return f'{self.full_name} --- {self.message} --- {self.email}'
-
     class Meta():
         verbose_name_plural = 'contact us'
