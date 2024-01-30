@@ -54,11 +54,12 @@
                 </div> 
             </div>
             <br>
-            <form class="mb-5" method="post" id="contactForm" name="contactForm">
+            <form class="mb-5" method="post" id="contactForm" name="contactForm" action="{% url 'lightshop:contact'  %}">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-md-3 form-group mb-3">
                   <label for="" class="col-form-label"><strong>نام کامل</strong></label>
-                  <input type="text" class="form-control" name="name" id="name" placeholder="نام و نام خانوادگی خود را وارد کنید">
+                  <input type="text" class="form-control" name="full_name" id="name" placeholder="نام و نام خانوادگی خود را وارد کنید">
                 </div>
                 <div class="col-md-3 form-group mb-3">
                   <label for="" class="col-form-label"><strong>ایمیل</strong></label>
@@ -85,7 +86,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12 form-group">
-                  <input type="submit" value="Send Message" class="btn btn-danger  rounded-5 py-2 px-4">
+                  <input type="submit" value="ثبت و ارسال" class="btn btn-danger  rounded-5 py-2 px-4">
                   <span class="submitting"></span>
                 </div>
               </div>
