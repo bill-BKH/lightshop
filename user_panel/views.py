@@ -6,13 +6,9 @@ def user_profile(request):
     pass
 
 def carts(request):
-    user_carts = Cart.objects.filter(user=request.user)
-    all = []
-    for carts in user_carts:
-             all.append(carts)
-
-    return render(request , "user_panel/profile-orders.html" , {"datas" : all})
-
+    user_carts = Cart.objects.filter(user=request.user.id)
+    return render(request , "user_panel/profile-orders.html" , {"datas" : user_carts})
 def detail(request , id):
-    data = Cart.objects.get(id=id)
-    return render(request , 'user_panel/cart_detail.html',{"user_cart_details" : data })
+    cart = Cart.objects.filter(id=id).first()
+    cart_details =cart.cartdetail_set.all()
+    return render(request , 'user_panel/cart_detail.html',{"user_cart_details" : cart_details })
