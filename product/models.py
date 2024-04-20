@@ -6,6 +6,9 @@ from django.utils.text import slugify
 
 class ProductCategory(models.Model):
     title = models.CharField(max_length=64)
+    url_title = models.CharField(max_length=64,null=True,blank=True)
+    parent = models.ForeignKey('ProductCategory', on_delete=models.CASCADE, null=True, blank=True)
+
     def __str__(self):
         return self.title 
 
