@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.db import models
 from account.models import User
 class AddAddress(models.Model):
@@ -12,3 +13,6 @@ class AddAddress(models.Model):
         return f'{self.receiver_name} | {self.receiver_num}'
 
    
+=======
+from django.db import models
+>>>>>>> a6c731b (commit message)
