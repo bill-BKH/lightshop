@@ -1,5 +1,4 @@
 from django import forms
-from .models import AddAddress
 
 class AdressesForm(forms.Form):
     Receiver_full_name = forms.CharField(

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect , HttpResponse
 from cart.models import Cart , CartDetail
-from .models import AddAddress
+from .models import Address
 from .forms import AdressesForm
 from django.urls import reverse
 
@@ -27,12 +27,12 @@ def addresses(request):
             receiver_city=form.cleaned_data['Receiver_city']
             receiver_Postal_address=form.cleaned_data['receiver_Postal_address']
             receiver_Postal_code=form.cleaned_data['receiver_Postal_code']
-            Address = AddAddress.objects.create(user=request.user,receiver_name = receiver_name,receiver_num=receiver_num,receiver_state=receiver_state,
+            Address = Address.objects.create(user=request.user,receiver_name = receiver_name,receiver_num=receiver_num,receiver_state=receiver_state,
             receiver_city=receiver_city,receiver_Postal_address=receiver_Postal_address,receiver_Postal_code=receiver_Postal_code)
             Address.save()
             return redirect(reverse('user_panel:address'))
     else:
         form = AdressesForm()
-    user_address =AddAddress.objects.filter(user=request.user).first()
+        user_address =Address.objects.filter(user=request.user).first()
 
     return render(request,'user_panel/profile-addresses.html',{'form': form , 'UrAddress':user_address})

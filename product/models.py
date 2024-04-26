@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from account.models import User
 # Create your models here.
 
 
@@ -28,3 +29,13 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.title } | {self.price}'
     
+
+class ProductComment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    parent = models.ForeignKey('ProductComment', on_delete=models.CASCADE, null=True,blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+    like = models.IntegerField()
+    dislike = models.IntegerField()
+    confirmed_by_admin = models.BooleanField(default=False)
