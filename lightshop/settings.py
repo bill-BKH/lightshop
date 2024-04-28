@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'cart',
     'jalali_date',
     'user_panel',
+    'extentions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
