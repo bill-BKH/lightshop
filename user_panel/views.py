@@ -3,6 +3,8 @@ from cart.models import Cart , CartDetail
 from .models import Address
 from .forms import AdressesForm
 from django.urls import reverse
+from .forms import PersonalForm
+from account.models import User
 
 # Create your views here.
 def user_profile(request):
@@ -36,3 +38,26 @@ def addresses(request):
         user_address =Address.objects.filter(user=request.user).first()
 
     return render(request,'user_panel/profile-addresses.html',{'form': form , 'UrAddress':user_address})
+
+def profile_info (request):
+    info = User.objects.all().order_by()
+    return render(request,'profile-personal-info.html',{info:'info'})
+
+def profile_edit (request):
+    form = PersonalForm()
+    if request.method == 'POST':
+        form = PersonalForm(request.POST)
+        if form.is_valid():
+            email = request.POST.get('email')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            phone = request.POST.get('phone')
+            id_number = request.POST.get('id_number')
+            cart_number = request.POST.get('cart_number')
+            user_info = PersonalForm(email,first_name,last_name,phone,id_number,cart_number)
+            user_info.save()
+            form = PersonalForm()
+            context = {form:'form'}
+            return render(request,'profile-additional-info.html',context)
+    
+    return render(request,'profile-additional-info.html',{form : 'form'})
