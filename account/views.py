@@ -109,3 +109,7 @@ def forget_password(request, activate_code):
 def logout_page(request):
     logout(request)
     return redirect(reverse('account:login'))
+
+def profile(request):
+    context = {"the_intended_user":User.objects.filter(id=request.user.id).first()}
+    return context
