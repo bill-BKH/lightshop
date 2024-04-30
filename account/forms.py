@@ -41,7 +41,14 @@ class RegisterForm(forms.Form):
             'class':'input-ui pr-2',
             "placeholder" : "ایمیل خود را وارد کنید"
         })
-    )
+    ),
+    username = forms.CharField(
+        label='ایمیل',
+        widget=forms.EmailInput(attrs={
+            'class':'input-ui pr-2',
+            "placeholder" : "نام کاربری خود را وارد کنید"
+        })
+    ),
     password = forms.CharField(
         error_messages={
                "min_length" : "رمز عبور کوتاه است"
