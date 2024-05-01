@@ -42,7 +42,7 @@ def like(request):
         new_like = like - 1
         ProductComment.objects.filter(id=comment_id).update(like=new_like)
         comment.user_liked.remove(request.user)
-        return JsonResponse({"data" : '1' })
+        return JsonResponse({"data" : '2' })
     else :
         like = comment.like
         new_like = like + 1
@@ -65,7 +65,7 @@ def dislike(request):
         new_like = like - 1
         ProductComment.objects.filter(id=comment_id).update(dislike=new_like)
         comment.user_dislike.remove(request.user)
-        return JsonResponse({"data" : '1' })
+        return JsonResponse({"data" : '2' })
     else :
         like = comment.dislike
         new_dislike = like + 1
