@@ -541,9 +541,9 @@
                                                             <div class="footer">
                                                                 <div class="comments-likes">
                                                                     آیا این نظر برایتان مفید بود؟
-                                                                    <button class="btn-like" data-counter="{{ comment.like }}">بله
+                                                                    <button onclick="like({{comment.id}})" class="btn-like " data-counter="{{ comment.like }}">بله
                                                                     </button>
-                                                                    <button class="btn-like" data-counter="{{ comment.dislike }}">خیر
+                                                                    <button onclick="dislike({{comment.id}})" class="btn-like" data-counter="{{ comment.dislike }}">خیر
                                                                     </button>
                                                                 </div>
                                                             </div>
