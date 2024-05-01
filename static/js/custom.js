@@ -16,7 +16,6 @@ function getCookie(name) {
           }
           return cookieValue;
         }
-        
 function add_to_cart(product_id) {
   // console.log(product_id)
   fetch("http://127.0.0.1:8000/cart/addtocart/", {
@@ -29,7 +28,6 @@ function add_to_cart(product_id) {
 .then((response)=> response.json())
 .then((json) => document.querySelector('.count').innerHTML++);
 }
-
 function delete_form_cart(product_id) {
   fetch("http://127.0.0.1:8000/cart/deleteformcart/", {
     method: "POST",
@@ -41,7 +39,6 @@ function delete_form_cart(product_id) {
   .then((response)=> response.json())
   .then((json) => {if (json.data == 'success') {location.reload()}});
 }
-
 function add_count(product_id){
   fetch("http://127.0.0.1:8000/cart/addcount/" , {
   method : "POST",
@@ -51,11 +48,8 @@ function add_count(product_id){
   headers: {"X-CSRFToken": csrftoken }
   })
   .then((response)=> response.json())
-  
   .then((json) => { if (json.data == "1" ) {location.reload()}} )
-  
 }
-
 function minus_count(product_id){
   fetch("http://127.0.0.1:8000/cart/minuscount/" , {
   method : "POST",
@@ -65,7 +59,27 @@ function minus_count(product_id){
   headers: {"X-CSRFToken": csrftoken }
   })
   .then((response)=> response.json())
-  
   .then((json) => { if (json.data == "1" ) {location.reload()}} )
-  
+}
+function like(comment_id){
+  fetch("http://127.0.0.1:8000/product/like/" , {
+  method : "POST",
+  body: JSON.stringify({
+    comment_id : comment_id,
+  }),
+  headers: {"X-CSRFToken": csrftoken }
+  })
+  .then((response)=> response.json())
+  .then((json) => { if (json.data == "1" ) {location.reload()}})
+}
+function dislike(comment_id){
+  fetch("http://127.0.0.1:8000/product/dislike/" , {
+  method : "POST",
+  body: JSON.stringify({
+    comment_id : comment_id,
+  }),
+  headers: {"X-CSRFToken": csrftoken }
+  })
+  .then((response)=> response.json())
+  .then((json) => { if (json.data == "1" ) {location.reload()}})
 }
