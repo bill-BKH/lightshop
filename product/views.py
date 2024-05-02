@@ -8,9 +8,13 @@ import json
 # Create your views here.
 
 def product_detail(request, slug):
-    data = Product.objects.get(slug=slug)
+    product = Product.objects.get(slug=slug)
     comments = ProductComment.objects.filter(confirmed_by_admin=True)
-    return render(request, 'product/single-product.html',{'product':data, 'comments': comments})
+    product_related_category = ProductCategory.objects.get(id=product.category.all()[0].id)
+    related_products = Product.objects.filter(category=product_related_category).order_by('-id')[:10]
+    # print(product_related_category.id)
+    # print(related_product)
+    return render(request, 'product/single-product.html',{'product':product, 'comments': comments,'related_products':related_products})
 
 def home(request):
     products = Product.objects.all().order_by()
@@ -61,12 +65,12 @@ def dislike(request):
     if comment.has_user_disliked(request.user):
         like = comment.dislike
         new_like = like - 1
-        ProductComment.objects.filter(id=comment_id).update(dislike=new_like)
+        ProductComment.objects.filter(id=int(comment_id)).update(dislike=new_like)
         comment.user_dislike.remove(request.user)
         return JsonResponse({"data" : '2' })
     else :
         like = comment.dislike
         new_dislike = like + 1
-        ProductComment.objects.filter(id=comment_id).update(dislike=new_dislike)
+        ProductComment.objects.filter(id=int(comment_id)).update(dislike=new_dislike)
         comment.user_dislike.add(request.user)
         return JsonResponse({"data" : '1' })

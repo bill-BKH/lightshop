@@ -15,7 +15,6 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=300)
-    
     price = models.IntegerField()
     short_description =models.CharField(max_length=260)
     description = models.TextField(help_text="describe the product here")
@@ -39,8 +38,8 @@ class ProductComment(models.Model):
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
     confirmed_by_admin = models.BooleanField(default=False)
-    user_liked = models.ManyToManyField(User , related_name='user_liked', null=True , blank=True)
-    user_dislike = models.ManyToManyField(User , related_name="user_disliked" , null=True , blank=True)
+    user_liked = models.ManyToManyField(User , related_name='user_liked')
+    user_dislike = models.ManyToManyField(User , related_name="user_disliked")
     def has_user_liked(self, user):
         return user in self.user_liked.all()
     def has_user_disliked(self , user):
