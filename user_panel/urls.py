@@ -6,5 +6,6 @@ urlpatterns = [
     path('carts/',views.carts),
     path('details/<int:id>',views.detail , name="detail"),
     path('',views.user_profile),
-    path('addresses/',views.addresses,name='address')
+    path('addresses/',views.addresses,name='address'),
+    path('deleteuseraddress/', views.delete_user_address, name='delete_user_address')
 ]
