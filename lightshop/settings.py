@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'cart',
     'jalali_date',
     'user_panel',
+    'extentions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,7 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'shop.views.catogory_shard'
+                'shop.views.catogory_shard',
+                'account.views.profile'
             ],
         },
     },

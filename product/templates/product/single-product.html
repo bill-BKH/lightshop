@@ -1,4 +1,5 @@
 {% extends 'shared/layout.html' %}
+{% load jalali_date_tag %}
 {% block content %}
         <!-- Start main-content -->
         <main class="main-content dt-sl mb-3">
@@ -534,7 +535,7 @@
                                                         <div class="col-md-9 col-sm-12 comment-content">
                            
                                                             <div class="comment-author">
-                                                                توسط {{comment.user.get_full_name }} در تاریخ {{ comment.created_date }}                                                            </div>
+                                                                توسط {{comment.user.get_full_name | upper }} در تاریخ {{ comment.created_date | show_jalali_month }}                                                            </div>
 
                                                             <p>{{ comment.text }}</p>
 
