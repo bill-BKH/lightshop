@@ -36,6 +36,12 @@ class ProductComment(models.Model):
     parent = models.ForeignKey('ProductComment', on_delete=models.CASCADE, null=True,blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
-    like = models.IntegerField()
-    dislike = models.IntegerField()
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
     confirmed_by_admin = models.BooleanField(default=False)
+    user_liked = models.ManyToManyField(User , related_name='user_liked', null=True , blank=True)
+    user_dislike = models.ManyToManyField(User , related_name="user_disliked" , null=True , blank=True)
+    def has_user_liked(self, user):
+        return user in self.user_liked.all()
+    def has_user_disliked(self , user):
+        return user in self.user_dislike.all()
