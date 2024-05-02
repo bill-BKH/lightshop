@@ -387,3 +387,14 @@ $(document).ready(function (l) {
     });
   }
 });
+function delete_user_address(id) {
+  fetch("http://127.0.0.1:8000/user-panel/deleteuseraddress/", {
+    method: "POST",
+    body: JSON.stringify({
+      addressid:id,
+    }),
+    headers: { "X-CSRFToken": csrftoken }
+  })
+  .then((response)=> response.json())
+  .then((json) => {if (json.data == 'success') {location.reload()}});
+}
