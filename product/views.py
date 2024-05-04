@@ -12,9 +12,10 @@ def product_detail(request, slug):
     comments = ProductComment.objects.filter(confirmed_by_admin=True)
     product_related_category = ProductCategory.objects.get(id=product.category.all()[0].id)
     related_products = Product.objects.filter(category=product_related_category).order_by('-id')[:10]
+    same_brand=Product.objects.filter(category=product_related_category,brand=product.brand).order_by('-id')[:10]
     # print(product_related_category.id)
     # print(related_product)
-    return render(request, 'product/single-product.html',{'product':product, 'comments': comments,'related_products':related_products})
+    return render(request, 'product/single-product.html',{'product':product, 'comments': comments,'related_products':related_products,'same_brands':same_brand})
 
 def home(request):
     products = Product.objects.all().order_by()
