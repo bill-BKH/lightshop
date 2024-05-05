@@ -23,6 +23,7 @@ class Product(models.Model):
     is_active = models.BooleanField()
     is_delete = models.BooleanField(default= False)
     picture = models.ImageField(upload_to="product" ,null= True, blank=True)
+    brand = models.CharField(max_length=300,blank=True,null=True)
     
 
     def __str__(self):
