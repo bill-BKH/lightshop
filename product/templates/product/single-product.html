@@ -770,53 +770,6 @@
                 </section>
                 <hr>
                 <br>
-                <section class="slider-section dt-sl mb-5">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="section-title text-sm-title title-wide no-after-title-wide ">
-                                <h2>محصولاتی از همان برند</h2>
-                                <a href="#">مشاهده همه</a>
-                            </div>
-                        </div>
-
-                        <!-- Start Product-Slider -->
-                        <div class="col-12">
-                            <div class="product-carousel carousel-lg owl-carousel owl-theme">
-                                {% for product in same_brands %}
-                                <div class="item">
-                                    <div class="product-card mb-3">
-                                        <div class="product-head">
-                                            <div class="rating-stars">
-                                                <i class="mdi mdi-star active"></i>
-                                                <i class="mdi mdi-star active"></i>
-                                                <i class="mdi mdi-star active"></i>
-                                                <i class="mdi mdi-star active"></i>
-                                                <i class="mdi mdi-star active"></i>
-                                            </div>
-                                            <div class="discount">
-                                                <span>20%</span>
-                                            </div>
-                                        </div>
-                                        <a class="product-thumb" href="shop-single.html">
-                                            <img src="{{product.picture.url}}" alt="Product Thumbnail">
-                                        </a>
-                                        <div class="product-card-body">
-                                            <h5 class="product-title">
-                                                <a href="shop-single.html">{{ product.title }}</a>
-                                            </h5>
-                                            <a class="product-meta" href="shop-categories.html">لباس زنانه</a>
-                                            <span class="product-price">{{ prodcut.price }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <!-- End Product-Slider -->
-
-                    </div>
-                </section>
-                <!-- End Product-Slider -->
             </div>
         </main>
         <!-- End main-content -->

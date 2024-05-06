@@ -1,21 +1,39 @@
 from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
-from .models import Product,ProductCategory,ProductComment
+from .models import Product,ProductCategory,ProductComment, ProductVisit
 from django.core.paginator import Paginator
 from account.models import User
 import json
-
+from utils.http_service import get_client_ip
 # Create your views here.
 
 def product_detail(request, slug):
     product = Product.objects.get(slug=slug)
     comments = ProductComment.objects.filter(confirmed_by_admin=True)
     product_related_category = ProductCategory.objects.get(id=product.category.all()[0].id)
-    related_products = Product.objects.filter(category=product_related_category).order_by('-id')[:10]
-    same_brand=Product.objects.filter(category=product_related_category,brand=product.brand).order_by('-id')[:10]
-    # print(product_related_category.id)
-    # print(related_product)
-    return render(request, 'product/single-product.html',{'product':product, 'comments': comments,'related_products':related_products,'same_brands':same_brand})
+    related_products = Product.objects.filter(category=product_related_category,brand=product.brand).order_by('-id')[:10]
+
+    
+    print('----'*30)
+    # print(get_client_ip(request))
+    user_ip = get_client_ip(request)
+    is_product_visited = ProductVisit.objects.filter(ip__iexact=user_ip,product=product).exists()
+    if is_product_visited:
+        pass
+    else:
+        if request.user.is_authenticated:
+            new_visit = ProductVisit(user=request.user, product=product,ip=get_client_ip(request))
+            new_visit.save()
+        else:
+            new_visit = ProductVisit(product=product,ip=get_client_ip(request))
+            new_visit.save()
+
+    print('----'*30)
+
+
+
+    return render(request, 'product/single-product.html',{'product':product, 'comments': comments,'related_products':related_products})
+
 
 def home(request):
     products = Product.objects.all().order_by()

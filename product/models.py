@@ -3,7 +3,8 @@ from django.utils.text import slugify
 from account.models import User
 # Create your models here.
 
-
+# class ProductGallery(models.Model):
+    
 
 class ProductCategory(models.Model):
     title = models.CharField(max_length=64)
@@ -29,7 +30,6 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.title } | {self.price}'
     
-
 class ProductComment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -41,7 +41,13 @@ class ProductComment(models.Model):
     confirmed_by_admin = models.BooleanField(default=False)
     user_liked = models.ManyToManyField(User , related_name='user_liked')
     user_dislike = models.ManyToManyField(User , related_name="user_disliked")
+
     def has_user_liked(self, user):
         return user in self.user_liked.all()
     def has_user_disliked(self , user):
         return user in self.user_dislike.all()
+    
+class ProductVisit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    ip = models.CharField(max_length=20)
