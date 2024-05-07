@@ -136,6 +136,11 @@ def verify(request):
         if response['Status'] == 100:
             current_cart.is_paid = True
             current_cart.payment_date = timezone.now()
+            cart_detail = current_cart.cartdetail_set.all()
+            for i in cart_detail:
+               product = i.product
+               product.sold += i.count
+               product.save()
             current_cart.save()
             return HttpResponse(f'payment is succesful')
         else:
