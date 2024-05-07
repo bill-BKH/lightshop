@@ -25,6 +25,7 @@ class Product(models.Model):
     is_delete = models.BooleanField(default= False)
     picture = models.ImageField(upload_to="product" ,null= True, blank=True)
     brand = models.CharField(max_length=300,blank=True,null=True)
+    sold = models.IntegerField(default=0)
     
 
     def __str__(self):
