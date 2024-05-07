@@ -10,9 +10,10 @@ def index(request):
     visited_product = [] 
     for visit in visited_product2:
         visited_product.append(Product.objects.get(id =visit.product.id))
+    most_solds = Product.objects.order_by('-sold')[:10]
 
 
-    return render(request, 'shop/index.html',{'visited_product':visited_product})
+    return render(request, 'shop/index.html',{'visited_product':visited_product, "most_solds":most_solds})
 
 
 def catogory_shard(request):
