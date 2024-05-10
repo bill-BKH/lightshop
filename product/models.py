@@ -4,8 +4,6 @@ from account.models import User
 # Create your models here.
 
 # class ProductGallery(models.Model):
-    
-
 class ProductCategory(models.Model):
     title = models.CharField(max_length=64)
     url_title = models.CharField(max_length=64,null=True,blank=True)
@@ -40,8 +38,14 @@ class ProductComment(models.Model):
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
     confirmed_by_admin = models.BooleanField(default=False)
-    user_liked = models.ManyToManyField(User , related_name='user_liked')
-    user_dislike = models.ManyToManyField(User , related_name="user_disliked")
+    user_liked = models.ManyToManyField(User , related_name='user_liked',blank=True)
+    user_dislike = models.ManyToManyField(User , related_name="user_disliked", blank=True)
+
+    def total_likes(self):
+        return self.user_liked.count()
+
+    def total_dislikes(self):
+        return self.user_dislike.count()
 
     def has_user_liked(self, user):
         return user in self.user_liked.all()

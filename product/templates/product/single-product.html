@@ -542,9 +542,9 @@
                                                             <div class="footer">
                                                                 <div class="comments-likes">
                                                                     آیا این نظر برایتان مفید بود؟
-                                                                    <button  onclick="like({{comment.id}})" class="btn-like" > <span id="cosume-like">{{ comment.like }}</span> بله
+                                                                    <button  onclick="like({{comment.id}})" class="btn-like" > <span id="cosume-like-{{comment.id}}">{{ comment.total_likes }}</span> بله
                                                                     </button>
-                                                                    <button onclick="dislike({{comment.id}})" class="btn-like"><span id="cosume-dislike">{{ comment.dislike }}</span> خیر
+                                                                    <button onclick="dislike({{comment.id}})" class="btn-like"><span id="cosume-dislike-{{comment.id}}">{{ comment.total_dislikes }}</span> خیر
                                                                     </button>
                                                                 </div>
                                                             </div>

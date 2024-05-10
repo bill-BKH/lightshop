@@ -70,7 +70,7 @@ function like(comment_id){
   headers: {"X-CSRFToken": csrftoken }
   })
   .then((response)=> response.json())
-  .then((json) => { if (json.data == "1" ) {document.getElementById("cosume-like").innerHTML++ } else if(json.data == "2") {document.getElementById("cosume-like").innerHTML-- }})
+  .then((json) => { if (json.data == "1" ) {document.getElementById(`cosume-like-${comment_id}`).innerHTML++ } else if(json.data == "2") {document.getElementById(`cosume-like-${comment_id}`).innerHTML-- }})
 }
 function dislike(comment_id){
   fetch("http://127.0.0.1:8000/product/dislike/" , {
@@ -81,5 +81,5 @@ function dislike(comment_id){
   headers: {"X-CSRFToken": csrftoken }
   })
   .then((response)=> response.json())
-  .then((json) => {if (json.data == "1" ) {document.getElementById("cosume-dislike").innerHTML++ } else if(json.data == "2") {document.getElementById("cosume-dislike").innerHTML-- } })
+  .then((json) => {if (json.data == "1" ) {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML++ } else if(json.data == "2") {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML-- } })
 }
