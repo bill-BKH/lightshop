@@ -9,7 +9,7 @@ from utils.http_service import get_client_ip
 
 def product_detail(request, slug):
     product = Product.objects.get(slug=slug)
-    comments = ProductComment.objects.filter(confirmed_by_admin=True)
+    comments = ProductComment.objects.filter(confirmed_by_admin=True , product=product)
     product_related_category = ProductCategory.objects.get(id=product.category.all()[0].id)
     related_products = Product.objects.filter(category=product_related_category,brand=product.brand).order_by('-id')[:10]
 
