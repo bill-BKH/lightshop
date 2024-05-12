@@ -13,4 +13,4 @@ def blog_detail(request , slug) :
     print(single_blog)
     print(comments)
     print('-'*88)
-    return render(request , 'blog/single-blog.html', {'blog' : single_blog , 'commnets' : comments})
+    return render(request , 'blog/single-blog.html', {'blog' : single_blog , 'comments' : comments})
