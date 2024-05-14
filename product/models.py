@@ -12,6 +12,11 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.title 
 
+class Brand(models.Model):
+    title=models.CharField(max_length=300)
+    def __str__(self):
+           return self.title 
+    
 class Product(models.Model):
     title = models.CharField(max_length=300)
     price = models.IntegerField()
@@ -22,7 +27,7 @@ class Product(models.Model):
     is_active = models.BooleanField()
     is_delete = models.BooleanField(default= False)
     picture = models.ImageField(upload_to="product" ,null= True, blank=True)
-    brand = models.CharField(max_length=300,blank=True,null=True)
+    brand = models.ForeignKey(Brand,on_delete=models.CASCADE)
     sold = models.IntegerField(default=0)
     
 
