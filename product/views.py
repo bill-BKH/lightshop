@@ -15,6 +15,8 @@ def product_detail(request, slug):
 
     
     print('----'*30)
+    print(product.gallery_pictures.all())
+    print('----'*30)
     # print(get_client_ip(request))
     user_ip = get_client_ip(request)
     is_product_visited = ProductVisit.objects.filter(ip__iexact=user_ip,product=product).exists()
