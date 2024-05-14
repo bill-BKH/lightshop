@@ -3,7 +3,6 @@ from django.utils.text import slugify
 from account.models import User
 # Create your models here.
 
-# class ProductGallery(models.Model):
 class ProductCategory(models.Model):
     title = models.CharField(max_length=64)
     url_title = models.CharField(max_length=64,null=True,blank=True)
@@ -21,13 +20,16 @@ class Product(models.Model):
     category = models.ManyToManyField(ProductCategory)
     is_active = models.BooleanField()
     is_delete = models.BooleanField(default= False)
-    picture = models.ImageField(upload_to="product" ,null= True, blank=True)
+    main_picture = models.ImageField(upload_to="product" ,null= True, blank=True)
     brand = models.CharField(max_length=300,blank=True,null=True)
     sold = models.IntegerField(default=0)
     
 
     def __str__(self):
         return f'{self.title } | {self.price}'
+class ProductGallery(models.Model):
+    picture = models.ImageField(upload_to='product_gallery')
+    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE,related_name='gallery_pictures')
     
 class ProductComment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)

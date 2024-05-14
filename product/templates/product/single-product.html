@@ -42,52 +42,34 @@
                                 <span class="badge">پر فروش</span>
                                 <div class="product-carousel owl-carousel" data-slider-id="1">
                                     <div class="item">
-                                        <a class="gallery-item" href="{{product.picture.url}}"
+                                        <a class="gallery-item" href="{{product.main_picture.url}}"
                                             data-fancybox="gallery1">
-                                            <img src="{{product.picture.url}}" alt="Product">
+                                            <img src="{{product.main_picture.url}}" alt="Product">
                                         </a>
                                     </div>
+                                    {% for item in product.productgallery_set.all %}
                                     <div class="item">
-                                        <a class="gallery-item" href="{{product.picture.url}}"
+                                        <a class="gallery-item" href="{{item.picture.url}}"
                                             data-fancybox="gallery1">
-                                            <img src="{{priduct.picture}}" alt="Product">
+                                            <img src="{{item.picture.url}}" alt="Product">
                                         </a>
                                     </div>
-                                    <div class="item">
-                                        <a class="gallery-item" href="{{product.picture.url}}"
-                                            data-fancybox="gallery1">
-                                            <img src="{{product.picture.url}}" alt="Product">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a class="gallery-item" href="{{product.picture.url}}"
-                                            data-fancybox="gallery1">
-                                            <img src="{{product.picture.url}}" alt="Product">
-                                        </a>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                                 <div class="d-flex justify-content-center flex-wrap">
                                     <ul class="product-thumbnails owl-thumbs ml-2" data-slider-id="1">
-                                        <li class="owl-thumb-item active">
-                                            <a href="{{priduct.picture.url}}">
-                                                <img src="{{product.picture.url}}" alt="Product">
-                                            </a>
-                                        </li>
                                         <li class="owl-thumb-item">
-                                            <a href="{{priduct.picture.url}}">
-                                                <img src="{{priduct.picture.url}}" alt="Product">
+                                            <a href="{{product.main_picture.url}}">
+                                                <img src="{{product.main_picture.url}}" alt="Product">
                                             </a>
                                         </li>
-                                        <li class="owl-thumb-item">
-                                            <a href="{{priduct.picture.url}}">
-                                                <img src="{{priduct.picture.url}}" alt="Product">
-                                            </a>
-                                        </li>
-                                        <li class="owl-thumb-item">
-                                            <a href="{{priduct.picture.url}}">
-                                                <img src="{{priduct.picture.url}}" alt="Product">
-                                            </a>
-                                        </li>
+                                        {% for item in product.productgallery_set.all %}
+                                            <li class="owl-thumb-item">
+                                                <a href="{{item.picture.url}}">
+                                                    <img src="{{item.picture.url}}" alt="Product">
+                                                </a>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                     <ul class="product-thumbnails">
                                         <li>
@@ -243,7 +225,7 @@
                                                 <img src="assets/img/single-product/1431842.jpg" alt="">
                                                 <p>{{product.description}}
                                                 </p>
-                                                <img src="{{product.picture.url}}" alt="">
+                                                <img src="{{product.main_picture.url}}" alt="">
                                                 <p>{{product.description}}
                                                 </p>
                                             </div>
@@ -262,7 +244,7 @@
                                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                             data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <img src="{{product.picture.url}}" alt="">
+                                                <img src="{{product.main_picture.url}}" alt="">
                                                 <p> {{product.description}}                                                </p>
                                                 <img src="assets/img/single-product/1436228.jpg" alt="">
                                                 <p>
@@ -750,7 +732,7 @@
                                             </div>
                                         </div>
                                         <a class="product-thumb" href="shop-single.html">
-                                            <img src="{{product.picture.url}}" alt="Product Thumbnail">
+                                            <img src="{{product.main_picture.url}}" alt="Product Thumbnail">
                                         </a>
                                         <div class="product-card-body">
                                             <h5 class="product-title">
