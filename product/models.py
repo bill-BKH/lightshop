@@ -27,7 +27,6 @@ class Product(models.Model):
     is_delete = models.BooleanField(default= False)
     brand = models.ForeignKey(Brand,on_delete=models.CASCADE)
     main_picture = models.ImageField(upload_to="product" ,null= True, blank=True)
-    brand = models.CharField(max_length=300,blank=True,null=True)
     sold = models.IntegerField(default=0)
     
 
