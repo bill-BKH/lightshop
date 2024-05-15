@@ -29,7 +29,7 @@ class Product(models.Model):
         return f'{self.title } | {self.price}'
 class ProductGallery(models.Model):
     picture = models.ImageField(upload_to='product_gallery')
-    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE,related_name='gallery_pictures')
+    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
     
 class ProductComment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
