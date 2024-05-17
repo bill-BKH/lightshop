@@ -25,7 +25,7 @@ class Product(models.Model):
     category = models.ManyToManyField(ProductCategory)
     is_active = models.BooleanField()
     is_delete = models.BooleanField(default= False)
-    brand = models.ForeignKey(Brand,on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand,on_delete=models.CASCADE,null=True,blank=True)
     main_picture = models.ImageField(upload_to="product" ,null= True, blank=True)
     sold = models.IntegerField(default=0)
     

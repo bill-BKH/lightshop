@@ -15,7 +15,7 @@ def product_detail(request, slug):
 
     
     print('----'*30)
-    print(product.gallery_pictures.all())
+    # print(product.gallery_pictures.all())
     print('----'*30)
     # print(get_client_ip(request))
     user_ip = get_client_ip(request)
@@ -95,3 +95,10 @@ def dislike(request):
         ProductComment.objects.filter(id=int(comment_id)).update(dislike=new_dislike)
         comment.user_dislike.add(request.user)
         return JsonResponse({"data" : '1' })
+    
+
+def reply_to_comment(request,comment_id):
+    user = request.user
+    product  = Product()
+    parent = ProductComment.objects.get(id=comment_id)
+    ProductComment()

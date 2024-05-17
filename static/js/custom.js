@@ -83,3 +83,16 @@ function dislike(comment_id){
   .then((response)=> response.json())
   .then((json) => {if (json.data == "1" ) {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML++ } else if(json.data == "2") {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML-- } })
 }
+
+function reply_to_comment(comment_id){
+  fetch("http://127.0.0.1:8000/product/reply_to_comment/" , {
+  method : "POST",
+  body: JSON.stringify({
+    comment_id : comment_id,
+  }),
+  headers: {"X-CSRFToken": csrftoken }
+  })
+  .then((response)=> response.json())
+  .then((json) => ())
+  }
+}

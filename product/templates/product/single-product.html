@@ -492,6 +492,41 @@
                                             <h2>نظرات کاربران</h2>
                                             <p class="count-comment">{{comments.count}} نظر</p>
                                         </div>
+                                                                    <div class="dt-sn">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-ui blog-comment">
+                                            <form onsubmit="return false">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-row-title mb-2">عنوان نظر شما (اجباری)
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <input class="input-ui pr-2" type="text"
+                                                                placeholder="عنوان نظر خود را بنویسید">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 mt-3 mb-3">
+                                                        <div class="form-row-title mb-2">متن نظر شما (اجباری)</div>
+                                                        <div class="form-row">
+                                                            <textarea class="input-ui pr-2 pt-2" rows="5"
+                                                                placeholder="متن خود را بنویسید"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 px-3">
+                                                        <p class="d-block">با “ثبت نظر” موافقت خود را با <a href="#"
+                                                                class="border-bottom-dt" target="_blank">قوانین
+                                                                انتشار محتوا</a> در دیجی‌کالا اعلام می‌کنم.</p>
+                                                        <button class="btn btn btn-primary px-3">
+                                                            ثبت نظر
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                         <ol class="comment-list">
                                             <!-- #comment-## -->
                                             {% for comment in comments %}
@@ -523,6 +558,7 @@
 
                                                             <div class="footer">
                                                                 <div class="comments-likes">
+                                                                    <button class="btn-like" onclick="reply_to_comment({{comment.id}})">پاسخ</button>
                                                                     آیا این نظر برایتان مفید بود؟
                                                                     <button  onclick="like({{comment.id}})" class="btn-like" > <span id="cosume-like-{{comment.id}}">{{ comment.total_likes }}</span> بله
                                                                     </button>

@@ -9,6 +9,5 @@ urlpatterns = [
         path('cat/<str:category>',views.product_by_cat, name='product_by_cat'),
         path('like/',views.like, name='like'),
         path('dislike/',views.dislike, name='dislike'),
-
-
+        path('reply_to_comment/',views.reply_to_comment,name='reply_to_comment'),
 ]

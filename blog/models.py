@@ -1,12 +1,13 @@
 from django.db import models
 from account.models import User
+from ckeditor.fields import RichTextField
 # Create your models here.
 class blog(models.Model):
     user = models.ForeignKey(User ,  on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
     created_date = models.DateField(auto_now=True)
     image = models.ImageField(upload_to="blog")
-    main_text = models.CharField(max_length=1024)
+    main_text = RichTextField(null=True,blank=True)
     slug = models.SlugField()
 
 class blog_comment(models.Model):
