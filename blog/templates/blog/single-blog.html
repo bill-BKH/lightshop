@@ -91,16 +91,55 @@
                             <ol class="comment-list">
                                 <!-- #comment-## -->
                                 {% for comment in comments %}
-                                        <li>
-                                            <div class="comment-body mt-3">
-                                                <div class="row">
-                                                    <div class="col-12 comment-content">
-                                                        <div class="comment-author">
-                                                        توسط {{comment.user.get_full_name}} در تاریخ {{ comment.created_date | show_jalali_month }}
+                                
+                                <li>
+                                    <div class="comment-body">
+                                        <div class="row">
+                                            
+                                        
+                                            <div class="col-md-12 col-sm-12 comment-content">
+               
+                                                <div class="comment-author">
+                                                    <div class="row">
+                                                        <div class="col-md-2 align-self-start">
+                                                            <img class="" src="{{comment.user.user_profile.url}}" alt="..." style="font-size: 28px;
+                                                    
+                                                            right: -20px;
+                                                            top: -27px;
+                                                            width: 50px;
+                                                            height: 50px;
+
+                                                            border-radius: 10px;
+                                                            color: #fff;
+                                                            text-align: center;
+                                                            line-height: 50px;"/>
                                                         </div>
+                                                        <div class="col">
 
-                                                        <p>{{ comment.text }}</p>
+                                                        </div>
+                                                        <div class="col-md-4 align-self-end ">
+                                                           <p> {{comment.user.get_full_name | upper }} در تاریخ {{ comment.created_date | show_jalali_month }}</p>                                                          </div>
 
+                                                        </div>
+                                                    </div>
+                                                    
+                                                <p>{{ comment.text }}</p>
+                                                <br>
+                                               <div class="container">
+                                                  <div class="row align-items-end align-items-center ">
+                                                     <div class="col align-self-end align-items-center">
+                                                         <button class="btn btn-danger  mb-2 " onclick="reply_to_comment({{comment.id}})" class="btn collapsed" type="button" data-toggle="collapse"
+                                                         data-target="#collapseOne" aria-expanded="false"
+                                                         aria-controls="collapseOne" ><i
+                                                         class="mdi mdi-comment-text-multiple-outline"></i> پاسخ ها </button>
+
+                                                         <button class="btn btn-primary  mb-2" type="button" data-toggle="collapse"
+                                                                    data-target="#collapseThree" aria-expanded="false"
+                                                                    aria-controls="collapseThree">
+                                                                    پاسخ دهید</button>
+                                                     </div>
+
+                                                      <div class="col ">
                                                         <div class="footer">
                                                             <div class="comments-likes">
                                                                 آیا این نظر برایتان مفید بود؟
@@ -108,13 +147,120 @@
                                                                 </button>
                                                                 <button onclick="blog_comment_dislike({{comment.id}})" class="btn-like" > <span id="cosume-dislike-{{comment.id}}">{{ comment.total_dislikes }}</span> خیر
                                                                 </button>
+                                                              </div>
+                                                              
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="accordion dt-sl accordion-product" id="accordionExample">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingOne">
+                                                            <h5 class="mb-0">
+                                                            
+                                                            </h5>
+                                                        </div>
+                
+                                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                                            data-parent="#accordionExample">
+                                                            <div class="card-body">
+                                                                <ol class="comment-list">
+                                                                    <!-- #comment-## -->
+                                                                    
+                                                                    <!-- #comment-## -->
+                                                                    <li>
+                                                                        <div class="comment-body">
+                                                                            <div class="comment-author">
+                                                                                <span class="icon-comment">?</span>
+                                                                                <cite class="fn">رضا</cite>
+                                                                                <span class="says">گفت:</span>
+                                                                                <div class="commentmetadata">
+                                                                                    <a href="#">
+                                                                                        اسفند ۲۰, ۱۳۹۶ در ۹:۴۲ ب.ظ
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <p>
+                                                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
+                                                                                صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                                                            </p>
+                            
+                                                                            <div class="reply"><a class="comment-reply-link" href="#">پاسخ</a></div>
+                                                                        </div>
+                                                                        <ol class="children">
+                                                                            <li>
+                                                                                <div class="comment-body">
+                                                                                    <div class="comment-author">
+                                                                                        <span
+                                                                                            class="icon-comment mdi mdi-lightbulb-on-outline"></span>
+                                                                                        <cite class="fn">بهرامی راد</cite> <span
+                                                                                            class="says">گفت:</span>
+                                                                                        <div class="commentmetadata">
+                                                                                            <a href="#">
+                                                                                                اسفند ۲۰, ۱۳۹۶ در ۹:۴۷ ب.ظ
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی
+                                                                                        نامفهوم از صنعت چاپ و با استفاده از
+                                                                                        طراحان گرافیک است.
+                                                                                        چاپگرها و متون بلکه روزنامه و مجله در
+                                                                                        ستون و سطرآنچنان که لازم است و برای
+                                                                                        شرایط فعلی تکنولوژی
+                                                                                        مورد نیاز و کاربردهای متنوع با هدف بهبود
+                                                                                        ابزارهای کاربردی می باشد.</p>
+                            
+                                                                                    <div class="reply"><a class="comment-reply-link"
+                                                                                            href="#">پاسخ</a></div>
+                                                                                </div>
+                                                                                
+                                                                                <!-- .children -->
+                                                                            </li>
+                                                                            <!-- #comment-## -->
+                                                                        </ol>
+                                                                        <!-- .children -->
+                                                                    </li>
+                                                                </ol>
+                                                                    
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingThree">
+                                                            <h5 class="mb-0">
+                                                                
+                                                            </h5>
+                                                        </div>
+                                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                                            data-parent="#accordionExample">
+                                                            <div class="card-body">
+                                                            
+                                                                    <div class="section-title title-wide no-after-title-wide dt-sl">
+                                                                        <h2>پرسش و پاسخ</h2>
+                                                                        <p class="count-comment">پرسش خود را در مورد محصول مطرح نمایید</p>
+                                                                    </div>
+                                                                    <div class="form-question-answer dt-sl mb-3">
+                                                                        <form action="">
+                                                                            <textarea class="form-control mb-3" rows="5"></textarea>
+                                                                            <button class="btn btn-dark float-right ml-3" disabled="">ثبت پرسش</button>
+                                                                            <div class="custom-control custom-checkbox float-right mt-2">
+                                                                                <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                                                                <label class="custom-control-label" for="customCheck3">اولین پاسخی که به
+                                                                                    پرسش من داده شد، از طریق ایمیل به من اطلاع دهید.</label>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                               </div>
                                             </div>
-                                        </li>
-                               {% endfor%}
+                                        </div>
+                                    </div>
+                                </li>
+
+                            {% endfor %}
+
+                                
                             </ol>
                         </div>
                     </div>
