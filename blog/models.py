@@ -26,3 +26,8 @@ class blog_comment(models.Model):
         return user in self.user_liked.all()
     def has_user_disliked(self , user):
         return user in self.user_dislike.all()
+    def total_likes(self):
+        return self.user_liked.count()
+
+    def total_dislikes(self):
+        return self.user_dislike.count()

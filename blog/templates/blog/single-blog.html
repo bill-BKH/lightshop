@@ -140,14 +140,13 @@
                                                      </div>
 
                                                       <div class="col ">
-                                                          <div class="footer">
-                                                              <div class="comments-likes">
-
-                                                                  آیا این نظر برایتان مفید بود؟
-                                                                  <button  onclick="like({{comment.id}})" class="btn-like" > <span id="cosume-like-{{comment.id}}">{{ comment.total_likes }}</span> بله
-                                                                  </button>
-                                                                  <button onclick="dislike({{comment.id}})" class="btn-like"><span id="cosume-dislike-{{comment.id}}">{{ comment.total_dislikes }}</span> خیر
-                                                                  </button>
+                                                        <div class="footer">
+                                                            <div class="comments-likes">
+                                                                آیا این نظر برایتان مفید بود؟
+                                                                <button  onclick="blog_comment_like({{comment.id}})" class="btn-like" > <span id="cosume-like-{{comment.id}}">{{ comment.total_likes }}</span> بله
+                                                                </button>
+                                                                <button onclick="blog_comment_dislike({{comment.id}})" class="btn-like" > <span id="cosume-dislike-{{comment.id}}">{{ comment.total_dislikes }}</span> خیر
+                                                                </button>
                                                               </div>
                                                               
                                                           </div>
