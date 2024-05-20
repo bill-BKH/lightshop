@@ -9,7 +9,7 @@ from utils.http_service import get_client_ip
 
 def product_detail(request, slug):
     product = Product.objects.get(slug=slug)
-    comments = ProductComment.objects.filter(confirmed_by_admin=True , product=product)
+    comments = ProductComment.objects.filter(confirmed_by_admin=True , product=product,parent=None)
     product_related_category = ProductCategory.objects.get(id=product.category.all()[0].id)
     related_products = Product.objects.filter(category=product_related_category,brand=product.brand).order_by('-id')[:10]
 
@@ -97,8 +97,10 @@ def dislike(request):
         return JsonResponse({"data" : '1' })
     
 
-def reply_to_comment(request,comment_id):
-    user = request.user
-    product  = Product()
-    parent = ProductComment.objects.get(id=comment_id)
-    ProductComment()
+def reply_to_comment(request):
+    data = json.loads(request.body.decode('utf-8'))
+    comment_id = data.get("comment_id")
+    parent_id = data.get('parent_id')
+    comment_text = data.get('comment_text')
+    print(comment_id,parent_id,comment_text)
+    return JsonResponse({'data':'success'})

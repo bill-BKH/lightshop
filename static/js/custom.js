@@ -84,18 +84,21 @@ function dislike(comment_id){
   .then((json) => {if (json.data == "1" ) {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML++ } else if(json.data == "2") {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML-- } })
 }
 
-// function reply_to_comment(comment_id){
-//   fetch("http://127.0.0.1:8000/product/reply_to_comment/" , {
-//   method : "POST",
-//   body: JSON.stringify({
-//     comment_id : comment_id,
-//   }),
-//   headers: {"X-CSRFToken": csrftoken }
-//   })
-//   .then((response)=> response.json())
-//   .then((json) => ())
-//   }
-// }
+function reply_to_comment(comment_id,parent_id){
+  comment_text = document.querySelector('#comment_text').value
+  fetch("http://127.0.0.1:8000/product/reply_to_comment/" , {
+  method : "POST",
+  body: JSON.stringify({
+    comment_id : comment_id,
+    parent_id: parent_id,
+    comment_text: comment_text
+  }),
+  headers: {"X-CSRFToken": csrftoken }
+  })
+  .then((response)=> response.json())
+  .then((json) => (console.log(json)))
+  }
+
 
 function blog_comment_dislike(comment_id){
   fetch("http://127.0.0.1:8000/blog/dislike/" , {
