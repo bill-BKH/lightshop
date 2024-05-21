@@ -10,4 +10,5 @@ urlpatterns = [
         path('like/',views.like, name='like'),
         path('dislike/',views.dislike, name='dislike'),
         path('reply_to_comment/',views.reply_to_comment,name='reply_to_comment'),
+        path('product_create_comment/',views.product_create_comment,name='product_create_comment'),
 ]
