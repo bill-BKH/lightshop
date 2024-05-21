@@ -53,20 +53,12 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-ui blog-comment">
-                                            <form onsubmit="return false">
+                                            <form>
                                                 <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-row-title mb-2">عنوان نظر شما (اجباری)
-                                                        </div>
-                                                        <div class="form-row">
-                                                            <input class="input-ui pr-2" type="text"
-                                                                placeholder="عنوان نظر خود را بنویسید">
-                                                        </div>
-                                                    </div>
                                                     <div class="col-12 mt-3 mb-3">
                                                         <div class="form-row-title mb-2">متن نظر شما (اجباری)</div>
                                                         <div class="form-row">
-                                                            <textarea class="input-ui pr-2 pt-2" rows="5"
+                                                            <textarea id="comment_text" class="input-ui pr-2 pt-2" rows="5"
                                                                 placeholder="متن خود را بنویسید"></textarea>
                                                         </div>
                                                     </div>
@@ -74,7 +66,7 @@
                                                         <p class="d-block">با “ثبت نظر” موافقت خود را با <a href="#"
                                                                 class="border-bottom-dt" target="_blank">قوانین
                                                                 انتشار محتوا</a> در دیجی‌کالا اعلام می‌کنم.</p>
-                                                        <button class="btn btn btn-primary px-3">
+                                                        <button onclick="blog_comment_create({{blog.id}})" class="btn btn btn-primary px-3">
                                                             ثبت نظر
                                                         </button>
                                                     </div>
@@ -134,7 +126,7 @@
                                                          class="mdi mdi-comment-text-multiple-outline"></i> پاسخ ها </button>
 
                                                          <button class="btn btn-primary  mb-2" type="button" data-toggle="collapse"
-                                                                    data-target="#collapseThree" aria-expanded="false"
+                                                                    data-target="#collapse{{comment.id}}" aria-expanded="false"
                                                                     aria-controls="collapseThree">
                                                                     پاسخ دهید</button>
                                                      </div>
@@ -230,7 +222,7 @@
                                                                 
                                                             </h5>
                                                         </div>
-                                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                                        <div id="collapse{{comment.id}}" class="collapse" aria-labelledby="headingThree"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body">
                                                             
@@ -239,15 +231,16 @@
                                                                         <p class="count-comment">پرسش خود را در مورد محصول مطرح نمایید</p>
                                                                     </div>
                                                                     <div class="form-question-answer dt-sl mb-3">
-                                                                        <form action="">
-                                                                            <textarea class="form-control mb-3" rows="5"></textarea>
-                                                                            <button class="btn btn-dark float-right ml-3" disabled="">ثبت پرسش</button>
+                                                                        
+                                                                            <textarea id="reply_blog_coment{{comment.id}}" class="form-control mb-3" rows="5"></textarea>
+                                                                            <button onclick="reply_to_blog_comment({{comment.id}} , {{blog.id}})" 
+                                                                                    class="btn btn-dark float-right ml-3" >ثبت پرسش</button>
                                                                             <div class="custom-control custom-checkbox float-right mt-2">
                                                                                 <input type="checkbox" class="custom-control-input" id="customCheck3">
                                                                                 <label class="custom-control-label" for="customCheck3">اولین پاسخی که به
                                                                                     پرسش من داده شد، از طریق ایمیل به من اطلاع دهید.</label>
                                                                             </div>
-                                                                        </form>
+                                                                        
                                                                     </div>
                                                             </div>
                                                         </div>
