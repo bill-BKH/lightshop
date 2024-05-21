@@ -5,12 +5,14 @@ from django.core.paginator import Paginator
 from account.models import User
 import json
 from utils.http_service import get_client_ip
+from .forms import Product_Comment_Form
 # Create your views here.
 
 def product_detail(request, slug):
     product = Product.objects.get(slug=slug)
     comments = ProductComment.objects.filter(confirmed_by_admin=True , product=product,parent=None)
     product_related_category = ProductCategory.objects.get(id=product.category.all()[0].id)
+
     related_products = Product.objects.filter(category=product_related_category,brand=product.brand).order_by('-id')[:10]
 
     
@@ -34,7 +36,7 @@ def product_detail(request, slug):
 
 
 
-    return render(request, 'product/single-product.html',{'product':product, 'comments': comments,'related_products':related_products})
+    return render(request, 'product/single-product.html',{'product':product, 'comments': comments,'related_products':related_products , "form" : Product_Comment_Form})
 
 
 def home(request):
@@ -100,7 +102,20 @@ def dislike(request):
 def reply_to_comment(request):
     data = json.loads(request.body.decode('utf-8'))
     comment_id = data.get("comment_id")
-    parent_id = data.get('parent_id')
+    product_id = data.get("product_id")
     comment_text = data.get('comment_text')
-    print(comment_id,parent_id,comment_text)
-    return JsonResponse({'data':'success'})
+    parent = ProductComment.objects.filter(id=comment_id).first()
+    product = Product.objects.filter(id=product_id).first()
+    reply_to_comment = ProductComment(user=request.user , text=comment_text , parent=parent,product=product )
+    reply_to_comment.save()
+    return JsonResponse({'data':'1'})
+    
+
+def product_create_comment(request):
+    data = json.loads(request.body.decode('utf-8'))
+    product_id = data.get("product_id")
+    comment_text = data.get('tetx_value')
+    product = Product.objects.filter(id=product_id).first()
+    new_comment = ProductComment(user=request.user , product=product , text=comment_text)
+    new_comment.save()
+    return JsonResponse({'data':'1'})

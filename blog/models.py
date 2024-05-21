@@ -12,6 +12,7 @@ class blog(models.Model):
 
 class blog_comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    parent = models.ForeignKey('blog_Comment', on_delete=models.CASCADE, null=True,blank=True)
     blog = models.ForeignKey(blog , on_delete=models.CASCADE)
     created_date = models.DateField(auto_now=True)
     text = models.CharField(max_length=512)

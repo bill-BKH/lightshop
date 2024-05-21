@@ -495,15 +495,15 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-ui blog-comment">
-                                                    <form onsubmit="return false">
+                                                    <form>
+                                                        {% csrf_token %}
                                                         <div class="row">
                                                           
                                                             <div class="col-12 mt-3 mb-3">
                                                                 <div class="form-row-title mb-2">متن نظر شما (اجباری)
                                                                 </div>
                                                                 <div class="form-row">
-                                                                    <textarea id="comment_text" class="input-ui pr-2 pt-2" rows="5"
-                                                                        placeholder="متن خود را بنویسید"></textarea>
+                                                                 {{form}}
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 px-3">
@@ -511,7 +511,7 @@
                                                                         href="#" class="border-bottom-dt"
                                                                         target="_blank">قوانین
                                                                         انتشار محتوا</a> در دیجی‌کالا اعلام می‌کنم.</p>
-                                                                <button class="btn btn btn-primary px-3">
+                                                                <button class="btn btn btn-primary px-3" onclick="product_create_comment({{product.id}})">
                                                                     ثبت نظر
                                                                 </button>
                                                             </div>
@@ -580,7 +580,7 @@
                                                             <div class="row align-items-end align-items-center ">
                                                                 <div class="col align-self-end align-items-center">
                                                                     <button class="btn btn-danger  mb-2 "
-                                                                        onclick="reply_to_comment({{comment.id}})"
+                                                                        
                                                                         class="btn collapsed" type="button"
                                                                         data-toggle="collapse"
                                                                         data-target="#responsecollapse{{comment.id}}" aria-expanded="false"
@@ -721,11 +721,11 @@
                                                                             <div
                                                                                 class="form-question-answer dt-sl mb-3">
                                                                                 <form action="">
-                                                                                    <textarea class="form-control mb-3"
+                                                                                    <textarea id="comment_reply{{comment.id}}" class="form-control mb-3"
                                                                                         rows="5"></textarea>
                                                                                     <button
                                                                                         class="btn btn-dark float-right ml-3"
-                                                                                        disabled="">ثبت پرسش</button>
+                                                                                        onclick="reply_to_comment({{comment.id}} , {{product.id}})">ثبت پرسش</button>
                                                                                     <div
                                                                                         class="custom-control custom-checkbox float-right mt-2">
                                                                                         <input type="checkbox"
