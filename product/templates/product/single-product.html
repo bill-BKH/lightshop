@@ -525,6 +525,7 @@
                                     <ol class="comment-list">
                                         <!-- #comment-## -->
                                         {% for comment in comments %}
+                                        {% if comment.parent == None %}
                                         <li>
                                             <div class="comment-body">
                                                 <div class="row">
@@ -565,7 +566,7 @@
                                                                 <div class="col">
 
                                                                 </div>
-                                                                <div class="col-md-4 align-self-end ">
+                                                                <div class="col-md-4 align-self-end pt-2 ">
                                                                     <p> {{comment.user.get_full_name | upper }} در تاریخ
                                                                         {{ comment.created_date | show_jalali_month }}
                                                                     </p>
@@ -597,15 +598,15 @@
                                                                 </div>
 
                                                                 <div class="col ">
-                                                                    <div class="footer">
+                                                                    
                                                                         <div class="comments-likes">
-
-                                                                            آیا این نظر برایتان مفید بود؟
+                                                                                <div class="d-none d-lg-inline-block ">
+                                                                            آیا این نظر برایتان مفید بود؟</div>
                                                                             <button onclick="like({{comment.id}})"class="btn-like"> <span id="cosume-like-{{comment.id}}">{{comment.total_likes }}</span> بله</button>
                                                                             <button onclick="dislike({{comment.id}})"class="btn-like"><span id="cosume-dislike-{{comment.id}}">{{comment.total_dislikes }}</span> خیر</button>
                                                                         </div>
 
-                                                                    </div>
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="accordion dt-sl accordion-product"
@@ -625,78 +626,102 @@
                                                                                 <!-- #comment-## -->
                                                                                 <li>
                                                                                 {% for sub_comment in comment.productcomment_set.all %}
+                                                                                
                                                                                 <div class="comment-body">
                                                                                     <div class="comment-author">
-                                                                                        <span
-                                                                                            class="icon-comment">?</span>
-                                                                                        <cite class="fn">رضا</cite>
+                                                                                        <img class="icon-comment" src="{{sub_comment.user.user_profile.url}}" alt="..." style="font-size: 28px;
+                                                    
+                                                            right: -20px;
+                                                            top: -27px;
+                                                            width: 50px;
+                                                            height: 50px;
+
+                                                            border-radius: 10px;
+                                                            color: #fff;
+                                                            text-align: center;
+                                                            line-height: 50px;"/>
+                                                                                        <cite class="fn">{{sub_comment.user.first_name}}</cite>
                                                                                         <span
                                                                                             class="says">گفت:</span>
                                                                                         <div
                                                                                             class="commentmetadata">
-                                                                                            <a href="#">
-                                                                                                اسفند ۲۰, ۱۳۹۶ در
-                                                                                                ۹:۴۲ ب.ظ
+                                                                                            <a href="#"> {{sub_comment.user.get_full_name | upper }} در تاریخ {{ sub_comment.created_date | show_jalali_month }}
                                                                                             </a>
                                                                                         </div>
                                                                                     </div>
                                                                                     <p>{{sub_comment.text}}</p>
-                                                                                    <div class="reply"><a onclick="reply_to_comment({{sub_comment.id}},{{sub_comment.parent.id}})"
-                                                                                            class="comment-reply-link"
-                                                                                            href="#">پاسخ</a></div>
-                                                                                </div>
-
-                                                                                {% endfor %}
-                                                                                                                                                                       <ol class="children">
-                                                                                        <li>
-                                                                                            <div class="comment-body">
-                                                                                                <div
-                                                                                                    class="comment-author">
-                                                                                                    <span
-                                                                                                        class="icon-comment mdi mdi-lightbulb-on-outline"></span>
-                                                                                                    <cite
-                                                                                                        class="fn">بهرامی
-                                                                                                        راد</cite> <span
-                                                                                                        class="says">گفت:</span>
-                                                                                                    <div
-                                                                                                        class="commentmetadata">
-                                                                                                        <a href="#">
-                                                                                                            اسفند ۲۰,
-                                                                                                            ۱۳۹۶ در ۹:۴۷
-                                                                                                            ب.ظ
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <p>لورم ایپسوم متن
-                                                                                                    ساختگی با تولید
-                                                                                                    سادگی
-                                                                                                    نامفهوم از صنعت چاپ
-                                                                                                    و با استفاده از
-                                                                                                    طراحان گرافیک است.
-                                                                                                    چاپگرها و متون بلکه
-                                                                                                    روزنامه و مجله در
-                                                                                                    ستون و سطرآنچنان که
-                                                                                                    لازم است و برای
-                                                                                                    شرایط فعلی تکنولوژی
-                                                                                                    مورد نیاز و
-                                                                                                    کاربردهای متنوع با
-                                                                                                    هدف بهبود
-                                                                                                    ابزارهای کاربردی می
-                                                                                                    باشد.</p>
-
-                                                                                                <div class="reply"><a
-                                                                                                        class="comment-reply-link"
-                                                                                                        href="#">پاسخ</a>
+                                                                                    <div class="reply"><button class="btn btn-primary  mb-2" type="button"
+                                                                                        data-toggle="collapse"
+                                                                                        data-target="#sub_collapse{{sub_comment.id}}"
+                                                                                        aria-expanded="false"
+                                                                                        aria-controls="sub_collapse{{sub_comment.id}}">
+                                                                                        پاسخ دهید</button></div>
+                                                                                    <div class="accordion dt-sl accordion-product" id="accordionExample">
+                                                                                        <div class="card">
+                                                                                            <div class="card-header" id="headingThree">
+                                                                                                <h5 class="mb-0">
+                                                                                                    
+                                                                                                </h5>
+                                                                                            </div>
+                                                                                            <div id="sub_collapse{{sub_comment.id}}" class="collapse accordion-collapse " aria-labelledby="headingThree"
+                                                                                                data-parent="">
+                                                                                                <div class="card-body">
+                                                                                                
+                                                                                                        <div class="section-title title-wide no-after-title-wide dt-sl">
+                                                                                                            <h2>پرسش و پاسخ</h2>
+                                                                                                            <p class="count-comment">پاسخ خود را در مورد وبلاگ مطرح نمایید</p>
+                                                                                                        </div>
+                                                                                                        <div class="form-question-answer dt-sl mb-3">
+                                                                                                            
+                                                                                                                <textarea id="comment_reply{{sub_comment.id}}" class="form-control mb-3" rows="5"></textarea>
+                                                                                                                <button onclick="reply_to_comment({{sub_comment.id}},{{product.id}})" 
+                                                                                                                        class="btn btn-dark float-right ml-3" >ثبت پرسش</button>
+                                                                                                                <div class="custom-control custom-checkbox float-right mt-2">
+                                                                                                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                                                                                                    <label class="custom-control-label" for="customCheck3">اولین پاسخی که به
+                                                                                                                        پرسش من داده شد، از طریق ایمیل به من اطلاع دهید.</label>
+                                                                                                                </div>
+                                                                                                            
+                                                                                                        </div>
                                                                                                 </div>
                                                                                             </div>
-
-                                                                                            <!-- .children -->
-                                                                                        </li>
-                                                                                        <!-- #comment-## -->
-                                                                                    </ol>
-                                                                                    <!-- .children -->
-                                                                                </li>
-                                                                            </ol>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ol class="children">
+                                                                                    {% for sub_sub_comment in sub_comment.productcomment_set.all %}
+                                                                                    <li>
+                                                                                        <div class="comment-body">
+                                                                                            <div class="comment-author">
+                                                                                                <img class="icon-comment mdi mdi-lightbulb-on-outline" src="{{comment.user.user_profile.url}}" alt="..." style="font-size: 28px;
+                                                        
+                                                                                                    right: -20px;
+                                                                                                    top: -27px;
+                                                                                                    width: 50px;
+                                                                                                    height: 50px;
+                                        
+                                                                                                    border-radius: 10px;
+                                                                                                    color: #fff;
+                                                                                                    text-align: center;
+                                                                                                    line-height: 50px;"/>
+                                                                                                <cite class="fn">{{sub_sub_comment.user.first_name}}</cite> <span
+                                                                                                    class="says">گفت:</span>
+                                                                                                <div class="commentmetadata">
+                                                                                                    <a href="#">
+                                                                                                        {{sub_sub_comment.user.get_full_name | upper }} در تاریخ {{ sub_sub_comment.created_date | show_jalali_month }} 
+            
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <p>{{sub_sub_comment.text}}</p>
+                                                                                        </div>
+                                                                                        {% endfor %}
+                                                                                        <!-- .children -->
+                                                                                    </li>
+                                                                                    {% endfor %}
+                                                                                        </ol>
+                                                                            </div>
+                                                                                
+                                                                     
 
                                                                         </div>
                                                                     </div>
@@ -725,19 +750,10 @@
                                                                                         rows="5"></textarea>
                                                                                     <button
                                                                                         class="btn btn-dark float-right ml-3"
-                                                                                        onclick="reply_to_comment({{comment.id}} , {{product.id}})">ثبت پرسش</button>
+                                                                                        onclick="reply_to_comment({{comment.id}},{{product.id}})">ثبت پرسش</button>
                                                                                     <div
                                                                                         class="custom-control custom-checkbox float-right mt-2">
-                                                                                        <input type="checkbox"
-                                                                                            class="custom-control-input"
-                                                                                            id="customCheck3">
-                                                                                        <label
-                                                                                            class="custom-control-label"
-                                                                                            for="customCheck3">اولین
-                                                                                            پاسخی که به
-                                                                                            پرسش من داده شد، از طریق
-                                                                                            ایمیل به من اطلاع
-                                                                                            دهید.</label>
+                                                                                        
                                                                                     </div>
                                                                                 </form>
                                                                             </div>
@@ -749,7 +765,7 @@
                                                     </div>
                                                 </div>
                                         </li>
-
+                                            {% endif %}
                                         {% endfor %}
 
 
