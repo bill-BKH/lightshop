@@ -96,7 +96,7 @@ function reply_to_comment(comment_id,product_id){
   headers: {"X-CSRFToken": csrftoken }
   })
   .then((response)=> response.json())
-  .then((json) => (console.log(json)))
+  .then((json) => { if (json.data == "1" ) {location.reload()}})
   }
 
 
@@ -157,7 +157,7 @@ function blog_comment_create(blog_id){
 
 
 function reply_to_blog_comment(comment_id, blog_id){
-  comment_text = document.querySelector(`#reply_blog_coment${comment_id}`).value
+  comment_text = document.querySelector(`#reply_blog_comment${comment_id}`).value
   fetch("http://127.0.0.1:8000/blog/blog_reply/" , {
   method : "POST",
   body: JSON.stringify({
