@@ -84,19 +84,19 @@ function dislike(comment_id){
   .then((json) => {if (json.data == "1" ) {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML++ } else if(json.data == "2") {document.getElementById(`cosume-dislike-${comment_id}`).innerHTML-- } })
 }
 
-function reply_to_comment(comment_id,product_id){
-  comment_text = document.querySelector(`#comment_reply${comment_id}`).value
+function reply_to_comment(comment_id,parent_id){
+  comment_text = document.querySelector('#comment_text').value
   fetch("http://127.0.0.1:8000/product/reply_to_comment/" , {
   method : "POST",
   body: JSON.stringify({
     comment_id : comment_id,
-    product_id: product_id,
+    parent_id: parent_id,
     comment_text: comment_text
   }),
   headers: {"X-CSRFToken": csrftoken }
   })
   .then((response)=> response.json())
-  .then((json) => { if (json.data == "1" ) {location.reload()}})
+  .then((json) => (console.log(json)))
   }
 
 
@@ -123,50 +123,3 @@ function blog_comment_like(comment_id){
   .then((response)=> response.json())
   .then((json) => { if (json.data == "1" ) {document.getElementById(`cosume-like-${comment_id}`).innerHTML++ } else if(json.data == "2") {document.getElementById(`cosume-like-${comment_id}`).innerHTML-- }})
 }
-
-
-function product_create_comment(product_id){
-  let comment_tetx_value = document.getElementById('id_comment_text').value
-  fetch("http://127.0.0.1:8000/product/product_create_comment/" , {
-  method : "POST",
-  body: JSON.stringify({
-    tetx_value : comment_tetx_value,
-    product_id : product_id
-  }),
-  headers: {"X-CSRFToken": csrftoken }
-  })
-  .then((response)=> response.json())
-  .then((json) => { if (json.data == "1" ) {location.reload()}})
-  
-}
-
-function blog_comment_create(blog_id){
-  let comment_tetx_value = document.getElementById('comment_text').value
-  fetch("http://127.0.0.1:8000/blog/blog_comment_create/" , {
-  method : "POST",
-  body: JSON.stringify({
-    tetx_value : comment_tetx_value,
-    blog_id : blog_id
-  }),
-  headers: {"X-CSRFToken": csrftoken }
-  })
-  .then((response)=> response.json())
-  .then((json) => { if (json.data == "1" ) {location.reload()}})
-  
-}
-
-
-function reply_to_blog_comment(comment_id, blog_id){
-  comment_text = document.querySelector(`#reply_blog_comment${comment_id}`).value
-  fetch("http://127.0.0.1:8000/blog/blog_reply/" , {
-  method : "POST",
-  body: JSON.stringify({
-    comment_id : comment_id,
-    blog_id: blog_id,
-    comment_text: comment_text
-  }),
-  headers: {"X-CSRFToken": csrftoken }
-  })
-  .then((response)=> response.json())
-  .then((json) => { if (json.data == "1" ) {location.reload()}})
-  }

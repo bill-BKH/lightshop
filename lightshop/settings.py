@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user_panel',
     'extentions',
     'blog',
+    'search',
     'ckeditor',
     'django.contrib.admin',
     'django.contrib.auth',

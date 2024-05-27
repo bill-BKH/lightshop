@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>search bar</title>
+        <style>
+            #result {
+                background-color: green;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <h1>hello this is search</h1>
+
+        <form action="{% url 'search:search' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="product" id="search_bar" onkeypress="waitForKey(document.getElementsByName('product'))">
+            <input type="submit" value="جستجو">
+        </form>
+
+        <div id="result">
+
+        </div>
+
+        <script>
+
+            let csrftoken = getCookie('csrftoken');
+            // The following function are copying from 
+            // https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
+            function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                        }
+                    }
+                    return cookieValue;
+                    }
+
+            const search_bar = document.getElementById('search_bar');
+            const result_elemnet = document.getElementById('result')
+            let job = 0;
+            function timer(element) {
+            job = setTimeout(() => {
+                document.querySelector('#result').innerHTML = '';
+                fetch("http://127.0.0.1:8000/search/", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        product_title: document.querySelector('#search_bar').value
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrftoken
+                    }
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    let results = data.data;
+                    // console.log(data)
+                    for (const property of results) {
+                        // console.log(`${property}: ${results[property]}`);
+                        result_elemnet.innerHTML += `${property[0]}/${property[1]}/${property[2]}<br>`
+                    }
+                });
+            }, 1000);}
+
+            function waitForKey(elements){
+                clearTimeout(job);
+                timer(elements);
+            }
+
+        </script>
+    </body>
+</html>
