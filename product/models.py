@@ -37,6 +37,10 @@ class ProductGallery(models.Model):
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
     
 class ProductComment(models.Model):
+    confirm_options = {
+        True:'تایید',
+        False:'رد'
+    } 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     parent = models.ForeignKey('ProductComment', on_delete=models.CASCADE, null=True,blank=True)
@@ -44,7 +48,7 @@ class ProductComment(models.Model):
     text = models.TextField()
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
-    confirmed_by_admin = models.BooleanField(default=False)
+    confirmed_by_admin = models.BooleanField(default=False, choices=confirm_options)
     user_liked = models.ManyToManyField(User , related_name='user_liked',blank=True)
     user_dislike = models.ManyToManyField(User , related_name="user_disliked", blank=True)
 

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fa">
 
@@ -10,20 +11,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#f7858d">
     <title>didikala | Search Page</title>
     <!-- Font Icon -->
-    <link rel="stylesheet" href="./assets/css/vendor/font-awesome.min.css">
-    <link rel="stylesheet" href="./assets/css/vendor/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/materialdesignicons.min.css">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="./assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap.min.css">
     <!-- Plugins -->
-    <link rel="stylesheet" href="./assets/css/vendor/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="./assets/css/vendor/owl.carousel.min.css">
-    <link rel="stylesheet" href="./assets/css/vendor/jquery.horizontalmenu.css">
-    <link rel="stylesheet" href="./assets/css/vendor/fancybox.min.css">
-    <link rel="stylesheet" href="./assets/css/vendor/nice-select.css">
-    <link rel="stylesheet" href="./assets/css/vendor/nouislider.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/jquery.horizontalmenu.css">
+    <link rel="stylesheet" href="/static/css/vendor/fancybox.min.css">
+    <link rel="stylesheet" href="/static/css/vendor/nice-select.css">
+    <link rel="stylesheet" href="/static/css/vendor/nouislider.min.css">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/colors/default.css" id="colorswitch">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/colors/default.css" id="colorswitch">
 </head>
 
 <body>
@@ -33,7 +34,7 @@
             <!-- Start ads -->
             <div class="ads-header-wrapper">
                 <a href="#" class="ads-header hidden-sm" target="_blank"
-                    style="background-image: url(./assets/img/banner/large-ads.jpg)"></a>
+                    style="background-image: url(/static/img/banner/large-ads.jpg)"></a>
             </div>
             <!-- End ads -->
             <!-- Start topbar -->
@@ -43,7 +44,7 @@
                         <div class="col-lg-2 col-md-3 col-6">
                             <div class="logo-area">
                                 <a href="#">
-                                    <img src="./assets/img/logo.png" alt="">
+                                    <img src="/static/img/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -422,7 +423,7 @@
                                     </li>
                                     <li class="list-item">
                                         <a href="#">
-                                            <img src="./assets/img/theme/mega-menu.jpg" alt="">
+                                            <img src="/static/img/theme/mega-menu.jpg" alt="">
                                         </a>
                                     </li>
                                 </ul>
@@ -581,7 +582,7 @@
                                         <li class="cart-item">
                                             <a href="#" class="header-basket-list-item">
                                                 <div class="header-basket-list-item-image">
-                                                    <img src="./assets/img/cart/1.jpg" alt="">
+                                                    <img src="/static/img/cart/1.jpg" alt="">
                                                 </div>
                                                 <div class="header-basket-list-item-content">
                                                     <p class="header-basket-list-item-title">
@@ -609,7 +610,7 @@
                                         <li class="cart-item">
                                             <a href="#" class="header-basket-list-item">
                                                 <div class="header-basket-list-item-image">
-                                                    <img src="./assets/img/cart/2.jpg" alt="">
+                                                    <img src="/static/img/cart/2.jpg" alt="">
                                                 </div>
                                                 <div class="header-basket-list-item-content">
                                                     <p class="header-basket-list-item-title">
@@ -637,7 +638,7 @@
                                         <li class="cart-item">
                                             <a href="#" class="header-basket-list-item">
                                                 <div class="header-basket-list-item-image">
-                                                    <img src="./assets/img/cart/3.jpg" alt="">
+                                                    <img src="/static/img/cart/3.jpg" alt="">
                                                 </div>
                                                 <div class="header-basket-list-item-content">
                                                     <p class="header-basket-list-item-title">
@@ -911,7 +912,8 @@
                             </div>
                         </div>
                         <div class="dt-sn dt-sn--box mb-3">
-                            <form action="">
+                            <form action="{% url 'search:searchtest' %}" method="get">
+                                {% csrf_token %}
                                 <div class="col-12">
                                     <div class="section-title text-sm-title title-wide mb-1 no-after-title-wide">
                                         <h2>فیلتر محصولات</h2>
@@ -922,7 +924,7 @@
                                         <input type="text" name="s"
                                             placeholder="نام محصول یا برند مورد نظر را بنویسید...">
                                         <button class="btn-search-widget">
-                                            <img src="./assets/img/theme/search.png" alt="">
+                                            <img src="/static/img/theme/search.png" alt="">
                                         </button>
                                     </div>
                                 </div>
@@ -1140,11 +1142,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-info btn-block" type="submit">
+                                    <button class="btn btn-info btn-block">
                                         فیلتر
                                     </button>
                                 </div>
                             </form>
+                            <button onclick="send_price_range()" class="btn btn-info btn-block">
+                                فیلتری که کار میکند
+                            </button>
                         </div>
                     </div>
                     <!-- End Sidebar -->
@@ -1187,7 +1192,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/07.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/07.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1210,7 +1215,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/017.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/017.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1233,7 +1238,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/013.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/013.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1256,7 +1261,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/09.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/09.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1279,7 +1284,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/010.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/010.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1308,7 +1313,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/011.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/011.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1331,7 +1336,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/018.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/018.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1354,7 +1359,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/020.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/020.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1377,7 +1382,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/019.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/019.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1419,7 +1424,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/010.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/010.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1448,7 +1453,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/07.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/07.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1471,7 +1476,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/017.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/017.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1494,7 +1499,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/019.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/019.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1517,7 +1522,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/013.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/013.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1540,7 +1545,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/09.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/09.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1569,7 +1574,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/011.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/011.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1592,7 +1597,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/018.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/018.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1615,7 +1620,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/020.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/020.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1657,7 +1662,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/017.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/017.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1680,7 +1685,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/013.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/013.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1703,7 +1708,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/09.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/09.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1726,7 +1731,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/010.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/010.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1749,7 +1754,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/018.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/018.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1778,7 +1783,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/011.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/011.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1807,7 +1812,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/07.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/07.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1830,7 +1835,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/020.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/020.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1853,7 +1858,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/019.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/019.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1895,7 +1900,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/018.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/018.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1924,7 +1929,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/07.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/07.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1947,7 +1952,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/017.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/017.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1976,7 +1981,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/011.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/011.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -1999,7 +2004,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/020.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/020.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2022,7 +2027,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/019.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/019.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2045,7 +2050,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/013.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/013.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2068,7 +2073,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/09.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/09.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2091,7 +2096,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/010.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/010.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2139,7 +2144,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/07.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/07.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2162,7 +2167,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/017.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/017.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2185,7 +2190,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/010.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/010.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2214,7 +2219,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/011.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/011.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2237,7 +2242,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/013.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/013.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2260,7 +2265,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/018.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/018.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2283,7 +2288,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/020.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/020.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2306,7 +2311,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/019.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/019.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2329,7 +2334,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/09.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/09.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2371,7 +2376,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/09.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/09.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2394,7 +2399,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/010.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/010.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2423,7 +2428,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/011.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/011.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2446,7 +2451,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/018.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/018.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2475,7 +2480,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/07.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/07.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2498,7 +2503,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/020.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/020.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2521,7 +2526,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/019.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/019.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2544,7 +2549,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/017.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/017.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2567,7 +2572,7 @@
                                                     </div>
                                                 </div>
                                                 <a class="product-thumb" href="shop-single.html">
-                                                    <img src="./assets/img/products/013.jpg" alt="Product Thumbnail">
+                                                    <img src="/static/img/products/013.jpg" alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
@@ -2779,43 +2784,43 @@
     <div id="colorswitch-option">
         <button><i class="mdi mdi-settings"></i></button>
         <ul>
-            <li class="active" data-path="./assets/css/colors/default.css"><span
+            <li class="active" data-path="/static/css/colors/default.css"><span
                     style="background-color: #f7858d;"></span></li>
-            <li data-path="./assets/css/colors/amber-color.css"><span style="background-color: #ffab00;"></span></li>
-            <li data-path="./assets/css/colors/blue-color.css"><span style="background-color: #2979ff;"></span></li>
-            <li data-path="./assets/css/colors/blue-grey-color.css"><span style="background-color: #607d8b;"></span>
+            <li data-path="/static/css/colors/amber-color.css"><span style="background-color: #ffab00;"></span></li>
+            <li data-path="/static/css/colors/blue-color.css"><span style="background-color: #2979ff;"></span></li>
+            <li data-path="/static/css/colors/blue-grey-color.css"><span style="background-color: #607d8b;"></span>
             </li>
-            <li data-path="./assets/css/colors/brown-color.css"><span style="background-color: #795548;"></span></li>
-            <li data-path="./assets/css/colors/cyan-color.css"><span style="background-color: #00bcd4;"></span></li>
-            <li data-path="./assets/css/colors/green-color.css"><span style="background-color: #4caf50;"></span></li>
-            <li data-path="./assets/css/colors/indigo-color.css"><span style="background-color: #3f51b5;"></span></li>
-            <li data-path="./assets/css/colors/lime-color.css"><span style="background-color: #cddc39;"></span></li>
-            <li data-path="./assets/css/colors/orange-color.css"><span style="background-color: #ff9800;"></span></li>
-            <li data-path="./assets/css/colors/red-color.css"><span style="background-color: #f44336;"></span></li>
-            <li data-path="./assets/css/colors/teal-color.css"><span style="background-color: #009688;"></span></li>
-            <li data-path="./assets/css/colors/purple-color.css"><span style="background-color: #9c27b0;"></span></li>
+            <li data-path="/static/css/colors/brown-color.css"><span style="background-color: #795548;"></span></li>
+            <li data-path="/static/css/colors/cyan-color.css"><span style="background-color: #00bcd4;"></span></li>
+            <li data-path="/static/css/colors/green-color.css"><span style="background-color: #4caf50;"></span></li>
+            <li data-path="/static/css/colors/indigo-color.css"><span style="background-color: #3f51b5;"></span></li>
+            <li data-path="/static/css/colors/lime-color.css"><span style="background-color: #cddc39;"></span></li>
+            <li data-path="/static/css/colors/orange-color.css"><span style="background-color: #ff9800;"></span></li>
+            <li data-path="/static/css/colors/red-color.css"><span style="background-color: #f44336;"></span></li>
+            <li data-path="/static/css/colors/teal-color.css"><span style="background-color: #009688;"></span></li>
+            <li data-path="/static/css/colors/purple-color.css"><span style="background-color: #9c27b0;"></span></li>
         </ul>
     </div>
     <!-- end colorPanel -->
     <!-- Core JS Files -->
-    <script src="./assets/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/vendor/popper.min.js"></script>
-    <script src="./assets/js/vendor/bootstrap.min.js"></script>
+    <script src="/static/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="/static/js/vendor/popper.min.js"></script>
+    <script src="/static/js/vendor/bootstrap.min.js"></script>
     <!-- Plugins -->
-    <script src="./assets/js/vendor/bootstrap-slider.min.js"></script>
-    <script src="./assets/js/vendor/owl.carousel.min.js"></script>
-    <script src="./assets/js/vendor/owl.carousel2.thumbs.min.js"></script>
-    <script src="./assets/js/vendor/jquery.nicescroll.min.js"></script>
-    <script src="./assets/js/vendor/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/vendor/nouislider.min.js"></script>
-    <script src="./assets/js/vendor/jquery.horizontalmenu.js"></script>
-    <script src="./assets/js/vendor/jquery.fancybox.min.js"></script>
-    <script src="./assets/js/vendor/countdown.min.js"></script>
-    <script src="./assets/js/vendor/wNumb.js"></script>
-    <script src="./assets/js/vendor/ResizeSensor.min.js"></script>
-    <script src="./assets/js/vendor/theia-sticky-sidebar.min.js"></script>
+    <script src="/static/js/vendor/bootstrap-slider.min.js"></script>
+    <script src="/static/js/vendor/owl.carousel.min.js"></script>
+    <script src="/static/js/vendor/owl.carousel2.thumbs.min.js"></script>
+    <script src="/static/js/vendor/jquery.nicescroll.min.js"></script>
+    <script src="/static/js/vendor/jquery.nice-select.min.js"></script>
+    <script src="/static/js/vendor/nouislider.min.js"></script>
+    <script src="/static/js/vendor/jquery.horizontalmenu.js"></script>
+    <script src="/static/js/vendor/jquery.fancybox.min.js"></script>
+    <script src="/static/js/vendor/countdown.min.js"></script>
+    <script src="/static/js/vendor/wNumb.js"></script>
+    <script src="/static/js/vendor/ResizeSensor.min.js"></script>
+    <script src="/static/js/vendor/theia-sticky-sidebar.min.js"></script>
     <!-- Main JS File -->
-    <script src="./assets/js/main.js"></script>
+    <script src="/static/js/main.js"></script>
     <script>
         $(document).ready(function () {
             var nonLinearStepSlider = document.getElementById('slider-non-linear-step');
@@ -2831,7 +2836,7 @@
                     'min': [0],
                     '10%': [500, 500],
                     '50%': [40000, 1000],
-                    'max': [100000]
+                    'max': [10000000]
                 }
             });
             var nonLinearStepSliderValueElement = document.getElementById('slider-non-linear-step-value');
@@ -2839,6 +2844,40 @@
                 nonLinearStepSliderValueElement.innerHTML = values.join(' - ');
             });
         });
+
+        let csrftoken = getCookie('csrftoken');
+        // The following function are copying from 
+        // https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
+        function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                    }
+                }
+                return cookieValue;
+                }
+
+        function send_price_range(){
+            var nonLinearStepSliderValueElement = document.getElementById('slider-non-linear-step-value');
+            // nonLinearStepSliderValueElement.innerHTML = values.join(' - ');
+            fetch("http://127.0.0.1:8000/search/test/" , {
+                method : "POST",
+                body: JSON.stringify({
+                    'price_range':nonLinearStepSliderValueElement.innerHTML
+                }),
+                headers: {"X-CSRFToken": csrftoken }
+            })
+            // console.log('ok')
+            .then((response)=> response.json())
+            .then((json) => (console.log(json)))
+        }
     </script>
 </body>
 
