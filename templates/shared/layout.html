@@ -50,29 +50,95 @@
                         </div>
                         <div class="col-lg-6 col-md-5 hidden-sm">
                             <div class="search-area dt-sl">
-                                <form action="" class="search">
-                                    <input type="text"
-                                        placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
+                                <form action="{% url 'search:search' %}" method="post" class="search">
+                                    {% csrf_token %}
                                     <i class="far fa-search search-icon"></i>
+                                    <input type="text" name="product" id="search_bar" onkeypress="waitForKey(document.getElementsByName('product'))" 
+                                    placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
+                                    
                                     <button class="close-search-result" type="button"><i
                                             class="mdi mdi-close"></i></button>
-                                    <div class="search-result">
-                                        <ul>
-                                            <li>
-                                                <a href="#">موبایل</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">مد و پوشاک</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">میکروفن</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">میز تلویزیون</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            <div class="search-result">
+                                                <ul class="header-basket-list do-nice-scroll"  id="result">
+                                                    
+                                                </ul>
+                                            </div>
                                 </form>
+                        
+                                
+                                
+                        
+                                <script>
+                        
+                                    let csrftoken = getCookie('csrftoken');
+                                    // The following function are copying from 
+                                    // https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
+                                    function getCookie(name) {
+                                    var cookieValue = null;
+                                    if (document.cookie && document.cookie !== '') {
+                                        var cookies = document.cookie.split(';');
+                                        for (var i = 0; i < cookies.length; i++) {
+                                                var cookie = cookies[i].trim();
+                                                // Does this cookie string begin with the name we want?
+                                                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                                    break;
+                                                }
+                                                }
+                                            }
+                                            return cookieValue;
+                                            }
+                        
+                                    const search_bar = document.getElementById('search_bar');
+                                    const result_elemnet = document.getElementById('result')
+                                    let job = 0;
+                                    function timer(element) {
+                                    job = setTimeout(() => {
+                                        document.querySelector('#result').innerHTML = '';
+                                        fetch("http://127.0.0.1:8000/search/", {
+                                            method: "POST",
+                                            body: JSON.stringify({
+                                                product_title: document.querySelector('#search_bar').value
+                                            }),
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                                "X-CSRFToken": csrftoken
+                                            }
+                                        })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                            let results = data.data;
+                                            // console.log(data)
+                                            for (const property of results) {
+                                                // console.log(`${property}: ${results[property]}`);
+                                                result_elemnet.innerHTML += `
+                            <li class="cart-item">
+                                            <a href="http://127.0.0.1:8000/product/${property[1]}" class="header-basket-list-item">
+                                                <div class="header-basket-list-item-image">
+                                                    <img src="http://127.0.0.1:8000/media/${property[2]}" alt="">
+                                                </div>
+                                                <div class="header-basket-list-item-content">
+                                                    <p class="header-basket-list-item-title px-1">
+                                                        ${property[0]}
+                                                    </p>
+                                                    <div class="header-basket-list-item-footer pt-4 px-1">
+                                                        
+                                                       <p class=""> ${property[1]}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    `
+                                            }
+                                        });
+                                    }, 1000);}
+                        
+                                    function waitForKey(elements){
+                                        clearTimeout(job);
+                                        timer(elements);
+                                    }
+                        
+                                </script>
                             </div>
                         </div>
                         <div class="col-md-4 col-6 topbar-left">
@@ -766,7 +832,7 @@
         </footer>
         <!-- End footer -->
     </div>
-
+    
     <!-- colorPanel -->
     <div id="colorswitch-option">
         <button><i class="mdi mdi-settings"></i></button>
@@ -809,6 +875,7 @@
     <!-- Main JS File -->
     <script src="/static/js/main.js"></script>
     <script src="/static/js/custom.js"></script>
+    
 </body>
 
 </html>
